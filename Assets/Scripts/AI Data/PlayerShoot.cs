@@ -10,8 +10,9 @@ public class PlayerShoot : ShootAI
         mousePos.z = 0;
         Vector3 aimDirection3 = (mousePos - transform.position).normalized;
         aimDirection = aimDirection3;
+        RotateGun();
     }
-    public override bool decideShoot()
+    public override bool DecideShoot()
     {
         if (!Input.GetKeyDown(KeyCode.Mouse0)) { 
             return false;

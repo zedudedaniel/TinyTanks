@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class trackGunRotationToMousePoint : MonoBehaviour
+public class TrackGunRotationToMousePoint : MonoBehaviour
 {
     // Update is called once per frame
-    void Update()
+    void Update( )
     {
         Vector3 mousePosition = GetMouseWorldPosition();
         Vector3 aimDirection3 = (mousePosition - transform.position).normalized;

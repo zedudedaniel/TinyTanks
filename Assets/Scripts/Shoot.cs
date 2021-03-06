@@ -20,7 +20,7 @@ public class Shoot : MonoBehaviour
     {
         aimDirection = shootAI.aimDirection;
         fireTimer -= Time.deltaTime;
-        bool shouldShoot = shootAI.decideShoot(); //Aims the gun wherever it needs to be, returns bool that says whether you actually should.
+        bool shouldShoot = shootAI.DecideShoot(); //Aims the gun wherever it needs to be, returns bool that says whether you actually should.
         if (shouldShoot && fireTimer <=0 && bullets.Count < bulletLimit) //If you should shoot, and your fire rate allows it, and your active bullet limit allows it...
         {
             Fire(); //FIRE!
