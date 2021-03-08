@@ -6,14 +6,12 @@ public class BrownShoot : ShootAI
 {
     private Vector2 chosenAimDirection;
     private GameObject player;
-    //private Vector2 playerDirection = new Vector2(1,0);
     private GameObject hitObject;
     private float chooseDirectionTimer = 0;
-    //private Vector2 playerPos;
-    //private bool playerDirection = false;
     public void Start()
     {
-        player = Object.FindObjectOfType<PlayerTank>().gameObject;//.transform.position;
+        initRotate();
+        player = Object.FindObjectOfType<PlayerTank>().gameObject;// Identify the player object
         chosenAimDirection = Random.insideUnitCircle.normalized; //Select a random future direction
     }
     public void Update() //Use this to decide where to aim

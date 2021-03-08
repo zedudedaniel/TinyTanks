@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 4918066480418291474}
   - component: {fileID: 4918066480418291475}
   - component: {fileID: 4918066480418291472}
-  - component: {fileID: 4918066480418291473}
   - component: {fileID: 4918066480418291470}
   - component: {fileID: 4918066480418291471}
   - component: {fileID: 4918066480418291468}
+  - component: {fileID: 3525996149665655741}
   m_Layer: 0
   m_Name: Brown Tank
   m_TagString: Untagged
@@ -154,18 +154,6 @@ MonoBehaviour:
   shootAI: {fileID: 4918066480418291468}
   aimDirection: {x: 0, y: 0}
   bullets: []
---- !u!114 &4918066480418291473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4918066480418291469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f241d9cd5c521438b09618ab201d75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4918066480418291470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +196,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunRotator: {fileID: 4918066481594901777}
   aimDirection: {x: 1, y: 0}
+--- !u!114 &3525996149665655741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918066480418291469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b20ad84e16270bf43a35264c7d3e12d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  incoming: []
 --- !u!1 &4918066481433779565
 GameObject:
   m_ObjectHideFlags: 0

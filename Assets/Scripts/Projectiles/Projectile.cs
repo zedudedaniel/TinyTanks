@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Projectile : MonoBehaviour
 {
     public int bounces;
@@ -11,10 +10,12 @@ public class Projectile : MonoBehaviour
     public Vector2 direction;
     [HideInInspector]
     public Shoot creator;
+    public GameObject target;
     
     protected void Update()
     {
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        //tellIncoming();
     }
     private void OnDestroy()
     {
@@ -52,6 +53,20 @@ public class Projectile : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, 0, angle - 90); //Calculate the rotation
         transform.rotation = rotation; //Set the rotation
         bounces -= 1;
+        //tellIncoming();
         //Debug.Log(rb.velocity);
     }
+
+    /*protected void tellIncoming() {
+        GameObject victim = Physics2D.Raycast(transform.position, direction, 20, 8).collider.gameObject; //Identify what this is flying at, ignoring bullets in the air
+        if (victim.GetComponent<Tank>() != null) { //If this is flying at a tank
+            target = victim;
+            if (!target.GetComponent<Tank>().incoming.Contains(this)) //If this isn't already in the list, add it
+            {
+                target.GetComponent<Tank>().incoming.Add(this);
+            }
+        } else { //If this isn't flying at a tank
+
+        }
+    }*/
 } 
