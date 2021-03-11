@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class BrownShoot : ShootAI
 {
-    private Vector2 chosenAimDirection;
-    private GameObject player;
-    private GameObject hitObject;
-    private float chooseDirectionTimer = 0;
+    
     public void Start()
     {
         initRotate();

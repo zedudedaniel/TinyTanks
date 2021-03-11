@@ -8,6 +8,10 @@ public class ShootAI : MonoBehaviour
     public GameObject gunRotator;
     [HideInInspector]
     public Vector2 aimDirection;
+    public Vector2 chosenAimDirection;
+    public GameObject player;
+    public GameObject hitObject;
+    public float chooseDirectionTimer = 0;
 
     public virtual bool DecideShoot()
     {
@@ -21,7 +25,6 @@ public class ShootAI : MonoBehaviour
     }
     public virtual void initRotate() {
         float initAngle = gunRotator.transform.rotation.z;
-        Debug.Log(initAngle);
         aimDirection.x = Mathf.Cos(initAngle * Mathf.Deg2Rad);
         aimDirection.y = Mathf.Sin(initAngle * Mathf.Deg2Rad);
     }
