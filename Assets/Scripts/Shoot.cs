@@ -16,6 +16,8 @@ public class Shoot : MonoBehaviour
 
     public List<Projectile> bullets;
     private float fireTimer = 0;
+
+    public AudioSource source;
     public void Update()
     {
         aimDirection = shootAI.aimDirection;
@@ -37,5 +39,6 @@ public class Shoot : MonoBehaviour
         projec.bounces = numberOfProjectileBounces; //Set the remaining bullet's bounces to this turret shooter's maximum
         projec.creator = this;
         fireTimer = fireSpeed; //Reset firespeed timer
+        source.Play();
     }
 }

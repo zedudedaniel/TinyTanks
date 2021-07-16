@@ -5,45 +5,52 @@ using UnityEngine;
 public class TealMovement : MovementAI
 {
     private Vector2 chosenDirection;
-    private float chooseDirection = 1;
-    private Vector2[] directions = new Vector2[8]; //The eight directions the tank could move
+    private float chooseDirectionTimer = 0;
+    private float moveTimer;
+    //private Vector2[] directions = new Vector2[8]; //The eight directions the tank could move
+    private int direction;
+    private Vector2[] directionArray = new Vector2[8] {
+        new Vector2(1, 0),
+        new Vector2(1, 1).normalized,
+        new Vector2(0, 1),
+        new Vector2(-1, 1).normalized,
+        new Vector2(-1, 0),
+        new Vector2(-1, -1).normalized,
+        new Vector2(0, -1),
+        new Vector2(1, -1).normalized
+    };
+    //private bool awoke = false;
+    public void Awake()
+    {
+    }
     public void Start()
     {
-        int addConst = 0;
-        for(int i = -1; i < 2; i++) {
-            for(int j = -1; j < 2; j++) { //Each of 8 directions, add to the thing
-                if (i == 0 && j ==0) {
-                addConst = -1;
-                continue;
-                }
-                directions[i+j+2+addConst] = new Vector2(i,j);
-            }
-        }
-        chosenDirection = directions[Random.Range(0, 8)];
+        direction = Random.Range(0, 8); //Used as ID for direction array
+        moveTimer = Random.Range(1, 9); //Move in the first direction for 1-8 seconds
     }
     public override Vector2 decideMovement()
-    {
-        Debug.Log(Physics2D.Raycast(transform.position, chosenDirection, 0.8f).collider.gameObject.GetComponent<Wall>());
-        Debug.Log(chosenDirection);
-        if (chosenDirection == new Vector2 (0,0) || chooseDirection <= 0 || Physics2D.Raycast(transform.position, chosenDirection, 1).collider.gameObject.GetComponent<Wall>() != null)
-        { //If the timer ran out, or there's a wall in the way, it's time to choose a new direction
-            List<Vector2> possMoves = new List<Vector2>();
-            for(int i = 0; i < 8; i++)
+    { 
+        if (chooseDirectionTimer > 0) //If you've decided to wait before moving...
+        {
+            chooseDirectionTimer -= Time.deltaTime;
+            return new Vector2(0, 0); //Stay still and count down your timer to start moving
+        }
+        else //If the timer says to move
+        {
+            Vector2 pos;
+            pos.x = transform.position.x;
+            pos.y = transform.position.y; //Needed to translate Vector3 into Vector2
+            if (moveTimer <= 0 || Physics2D.Raycast(pos, pos + directionArray[direction], 1f)) //If it's time to stop, or there's something in the way
             {
-                if (chosenDirection != directions[i] && Physics2D.Raycast(transform.position, directions[i], 1).collider.gameObject.GetComponent<Wall>() != null)
-                { //If this direction is a legal move
-                    possMoves.Add(directions[i]); //Add it to the randomly selected pool of chosen directions
-                }
+                chooseDirectionTimer = Random.Range(1, 3);
+                direction = Random.Range(0, 8);
+                moveTimer = Random.Range(1, 9);
+                return new Vector2(0, 0);
             }
-            if (possMoves.Count > 0) { //If there are legal moves
-                chosenDirection = directions[Random.Range(0, possMoves.Count)];
-                chooseDirection = Random.Range(0.5f, 3f);
-            } else { //If there are no equal moves
-                chosenDirection = new Vector2(0,0);
+            else //If we're all good to move
+            {
+                return directionArray[direction];
             }
         }
-        chooseDirection -= Time.deltaTime;
-        //Debug.Log(chosenDirection);
-        return chosenDirection;
     }
 }
