@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
         GameObject otherObject = collision.collider.gameObject; //Quick way to reference the other object hit
         if (otherObject.GetComponent<Projectile>()!=null) //If this hit another projectile...
         {
-            Destroy(gameObject); //Destroy this object. The other one will run this too, so no need to say to destroy the other.
+            Destroy(gameObject); //Destroy this object. The other one will run this too, so no need to say to destroy the other. (Unless it doesn't destroy itself, in case we don't write this here either.)
             return;
         } else if (otherObject.GetComponent<Wall>()!=null) //If this is a wall of some kind...
         {
@@ -56,17 +56,4 @@ public class Projectile : MonoBehaviour
         //tellIncoming();
         //Debug.Log(rb.velocity);
     }
-
-    /*protected void tellIncoming() {
-        GameObject victim = Physics2D.Raycast(transform.position, direction, 20, 8).collider.gameObject; //Identify what this is flying at, ignoring bullets in the air
-        if (victim.GetComponent<Tank>() != null) { //If this is flying at a tank
-            target = victim;
-            if (!target.GetComponent<Tank>().incoming.Contains(this)) //If this isn't already in the list, add it
-            {
-                target.GetComponent<Tank>().incoming.Add(this);
-            }
-        } else { //If this isn't flying at a tank
-
-        }
-    }*/
 } 
